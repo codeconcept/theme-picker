@@ -8,17 +8,40 @@ class Schedule extends Component {
   componentDidMount() {
     const { params } = this.props.match;
     if (params.town) {
-      getEventsByTown(params.town).then(activities => {
-        this.setState({
-          isLoading: false,
-          town: params.town,
-          activities
-        });
-      });
+      this.retrieveEventsByTown(params.town);
     } else {
-      getAllActivities().then(data => {
-        this.setState({ activities: data });
+      this.retrieveAllEvents();
+    }
+  }
+  //!\ make it an arrow function so that inside the function, 'this' is the Schedule component
+  retrieveEventsByTown = town => {
+    getEventsByTown(town).then(activities => {
+      this.setState({
+        isLoading: false,
+        town,
+        activities
       });
+    });
+  };
+
+  //!\ make it an arrow function so that inside the function, 'this' is the Schedule component
+  retrieveAllEvents = () => {
+    getAllActivities().then(data => {
+      this.setState({ activities: data, town: "" });
+    });
+  };
+
+  componentDidUpdate(prevProps, prevState) {
+    // if we navigated to all programs
+    if (
+      prevProps.match.params.town === undefined &&
+      this.props.match.params.town === undefined
+    ) {
+      return;
+    } else if (!this.props.match.params.town) {
+      this.retrieveAllEvents();
+    } else if (prevProps.match.params.town !== this.props.match.params.town) {
+      this.retrieveEventsByTown(this.props.match.params.town);
     }
   }
 
