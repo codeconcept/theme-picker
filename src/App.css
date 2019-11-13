@@ -64,3 +64,8 @@ a {
   padding-bottom: 10px;
   padding-right: 10px;
 }
+
+a:hover,
+a.selected {
+  border-bottom: 1px solid #F14B31;
+}

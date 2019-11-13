@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Route } from "react-router-dom";
+import { NavLink, Route, Switch } from "react-router-dom";
 import "./App.css";
 import Registration from "./Registration";
 import Schedule from "./Schedule";
@@ -11,10 +11,21 @@ class App extends React.Component {
     const { theme } = this.state;
     return (
       <div className={theme === "day" ? "App day" : "App night"}>
-        <Link to="/">Accueil</Link> <Link to="/registration">Inscriptions</Link>{" "}
-        <Link to="/schedule/Dijon">Programmes de Dijon</Link>{" "}
-        <Link to="/schedule/Lyon">Programmes de Lyon</Link>{" "}
-        <Link to="/schedule">Programmes</Link>{" "}
+        <NavLink exact activeClassName="selected" to="/">
+          Accueil
+        </NavLink>{" "}
+        <NavLink activeClassName="selected" to="/registration">
+          Inscriptions
+        </NavLink>{" "}
+        <NavLink exact activeClassName="selected" to="/schedule/Dijon">
+          Programmes de Dijon
+        </NavLink>{" "}
+        <NavLink exact activeClassName="selected" to="/schedule/Lyon">
+          Programmes de Lyon
+        </NavLink>{" "}
+        <NavLink exact activeClassName="selected" to="/schedule">
+          Programmes
+        </NavLink>{" "}
         <label htmlFor="theme">
           thème{" "}
           <select
@@ -26,9 +37,11 @@ class App extends React.Component {
             <option value="night">nuit</option>
           </select>
         </label>
-        <Route exact path="/" component={Home} />
-        <Route path="/registration" component={Registration} />
-        <Route path="/schedule/:town?" component={Schedule} />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/registration" component={Registration} />
+          <Route path="/schedule/:town?" component={Schedule} />
+        </Switch>
       </div>
     );
   }
