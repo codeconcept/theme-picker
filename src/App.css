@@ -20,3 +20,17 @@
 .App-link {
   color: #09d3ac;
 }
+
+.activities {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.activity {
+  width: 350px;
+  height: 200px;
+  margin-bottom: 20px;
+  border: 2px solid gray;
+  justify-content: center;
+}

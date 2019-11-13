@@ -3,6 +3,7 @@ import {
   getAllActivities,
   getEventsByTown
 } from "./services/activitiesService";
+import ScheduleDetails from "./ScheduleDetails";
 class Schedule extends Component {
   state = { isLoading: true, town: "", activities: [] };
   componentDidMount() {
@@ -51,10 +52,10 @@ class Schedule extends Component {
     return (
       <>
         <h1>{town ? `Programmes de ${town}` : "Programmes"}</h1>
-        <div>
-          <pre>
-            <code>{JSON.stringify(activities, null, 4)}</code>
-          </pre>
+        <div className="activities">
+          {activities.map(a => (
+            <ScheduleDetails activity={a} key={a.id} />
+          ))}
         </div>
       </>
     );
