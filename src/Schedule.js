@@ -3,7 +3,9 @@ import React, { Component } from 'react';
 class Schedule extends Component {
   state = {  }
   render() { 
-    return (<h1>Schedule</h1>);
+    console.log(this.props);
+    const {params} = this.props.match
+    return (<h1>{params.town ? (`Programmes de ${params.town}`) : ("Programmes")}</h1>);
   }
 }
  

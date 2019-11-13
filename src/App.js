@@ -10,10 +10,12 @@ function App() {
     <div className="App">
       <Link to="/">Accueil</Link>{" "}
       <Link to="/registration">Inscriptions</Link>{" "}
-      <Link to="/schedule">Programme</Link>
+      <Link to="/schedule/Dijon">Programmes de Dijon</Link>{" "}
+      <Link to="/schedule/Lyon">Programmes de Lyon</Link>{" "}
+      <Link to="/schedule">Programmes</Link>
       <Route exact path="/" component={Home} />
       <Route path="/registration" component={Registration} />
-      <Route path="/schedule" component={Schedule} />
+      <Route path="/schedule/:town?" component={Schedule} />
     </div>
   );
 }
